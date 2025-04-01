@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryBook - Create Your Personalized Children's Story</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">StoryBook</a>
+            <div class="nav-links">
+                <a href="#collections">Collections</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Create Your Child's Perfect Story</h1>
+            <p>Personalized children's books that make your little one the star of their own adventure</p>
+            <a href="#create" class="btn btn-primary">Start Creating</a>
+        </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section id="collections" class="featured-books">
+        <h2 class="section-title">Popular Collections</h2>
+        <div class="book-grid">
+            <div class="book-card">
+                <img src="https://placehold.co/600x800/FF6B6B/ffffff?text=Adventure+Collection" alt="Adventure Collection" class="book-image">
+                <div class="book-info">
+                    <h3 class="book-title">Adventure Collection</h3>
+                    <div class="book-meta">
+                        <span><i class="fas fa-book"></i> 5 Stories</span>
+                        <span><i class="fas fa-star"></i> 4.8/5</span>
+                    </div>
+                    <p class="book-price">From $29.99</p>
+                    <a href="#adventure" class="btn btn-secondary">Explore Stories</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <img src="https://placehold.co/600x800/4ECDC4/ffffff?text=Magic+Collection" alt="Magic Collection" class="book-image">
+                <div class="book-info">
+                    <h3 class="book-title">Magic Collection</h3>
+                    <div class="book-meta">
+                        <span><i class="fas fa-book"></i> 5 Stories</span>
+                        <span><i class="fas fa-star"></i> 4.9/5</span>
+                    </div>
+                    <p class="book-price">From $29.99</p>
+                    <a href="#magic" class="btn btn-secondary">Explore Stories</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <img src="https://placehold.co/600x800/FFE66D/ffffff?text=Nature+Collection" alt="Nature Collection" class="book-image">
+                <div class="book-info">
+                    <h3 class="book-title">Nature Collection</h3>
+                    <div class="book-meta">
+                        <span><i class="fas fa-book"></i> 5 Stories</span>
+                        <span><i class="fas fa-star"></i> 4.7/5</span>
+                    </div>
+                    <p class="book-price">From $29.99</p>
+                    <a href="#nature" class="btn btn-secondary">Explore Stories</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Creation Wizard -->
+    <section id="create" class="wizard-container">
+        <h2 class="wizard-title">Start Your Story</h2>
+        <div class="filters">
+            <div class="filter-grid">
+                <!-- Personalization Fields -->
+                <div class="filter-group">
+                    <label class="filter-label" for="childName">Child's Name</label>
+                    <input type="text" id="childName" class="filter-select" placeholder="Enter child's name">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="childAge">Child's Age</label>
+                    <input type="number" id="childAge" class="filter-select" min="1" max="12" placeholder="Enter age (1-12)">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="childGender">Child's Gender</label>
+                    <select id="childGender" class="filter-select">
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="neutral">Neutral</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="dedication">Dedication (Optional)</label>
+                    <input type="text" id="dedication" class="filter-select" placeholder="e.g., 'To my beloved child'">
+                </div>
+            </div>
+            <div class="filter-grid" style="margin-top: 2rem;">
+                <!-- Story Settings -->
+                <div class="filter-group">
+                    <label class="filter-label" for="theme">Theme</label>
+                    <select id="theme" class="filter-select">
+                        <option value="">Select a theme</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="magic">Magic</option>
+                        <option value="nature">Nature</option>
+                        <option value="space">Space</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="moral">Moral</label>
+                    <select id="moral" class="filter-select">
+                        <option value="">Select a moral</option>
+                        <option value="courage">Courage</option>
+                        <option value="friendship">Friendship</option>
+                        <option value="kindness">Kindness</option>
+                        <option value="perseverance">Perseverance</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="length">Length</label>
+                    <select id="length" class="filter-select">
+                        <option value="">Select length</option>
+                        <option value="short">Short (5-7 pages)</option>
+                        <option value="medium">Medium (8-12 pages)</option>
+                        <option value="long">Long (13-15 pages)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Preview -->
+        <div class="story-preview">
+            <div class="story-page">
+                <img src="" alt="Story illustration" class="story-image">
+                <div class="story-text">
+                    <h2 class="story-title"></h2>
+                    <p class="story-content"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-container" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Creating your magical story...</p>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-container" style="display: none;">
+            <i class="fas fa-exclamation-circle error-icon"></i>
+            <p class="error-text">Oops! Something went wrong. Please try again.</p>
+            <button class="btn btn-primary retry-button">Retry</button>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="button-group">
+            <button class="btn btn-secondary prev-btn" disabled>Previous</button>
+            <button class="btn btn-primary generate-btn">Generate Story</button>
+            <button class="btn btn-secondary next-btn" disabled>Next</button>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <h2 class="section-title">Choose Your Package</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="pricing-title">Basic</h3>
+                <p class="pricing-price">$29.99</p>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 1 Personalized Story</li>
+                    <li><i class="fas fa-check"></i> 5-7 Pages</li>
+                    <li><i class="fas fa-check"></i> Standard Quality Images</li>
+                    <li><i class="fas fa-check"></i> Digital PDF Version</li>
+                </ul>
+                <a href="#create" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3 class="pricing-title">Premium</h3>
+                <p class="pricing-price">$49.99</p>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 2 Personalized Stories</li>
+                    <li><i class="fas fa-check"></i> 8-12 Pages</li>
+                    <li><i class="fas fa-check"></i> High Quality Images</li>
+                    <li><i class="fas fa-check"></i> Digital PDF Version</li>
+                    <li><i class="fas fa-check"></i> Hardcover Book</li>
+                </ul>
+                <a href="#create" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3 class="pricing-title">Deluxe</h3>
+                <p class="pricing-price">$79.99</p>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 3 Personalized Stories</li>
+                    <li><i class="fas fa-check"></i> 13-15 Pages</li>
+                    <li><i class="fas fa-check"></i> Premium Quality Images</li>
+                    <li><i class="fas fa-check"></i> Digital PDF Version</li>
+                    <li><i class="fas fa-check"></i> Hardcover Book</li>
+                    <li><i class="fas fa-check"></i> Audio Narration</li>
+                </ul>
+                <a href="#create" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>StoryBook</h3>
+                <p>Creating magical stories for children, one page at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to receive updates and special offers!</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 StoryBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="story_generator.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

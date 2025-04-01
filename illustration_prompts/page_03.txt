@@ -1,0 +1,21 @@
+Create an illustration for a children's storybook page.
+
+Character:
+A cheerful young boy named Alex with curly brown hair, bright green eyes, and a cheerful blue jacket. Always accompanied by a cute white rabbit.
+
+Scene Style:
+Whimsical cartoon style, age-appropriate for 5–10 years, bright cheerful color palette, clean lines, forest or garden setting, soft natural lighting.
+
+Scene Description:
+Days passed, and nothing happened. Alex wanted to dig up the seed to see what was wrong. His rabbit friend nudged his hand gently, as if to say 'Wait!'
+
+Important:
+– Embed the following story text directly into the image, positioned like a printed storybook page.
+– Do not include extra borders, speech bubbles, or frames.
+– This is a full-page book illustration. Do not show the book or multiple panels.
+– Maintain consistent character appearance across all pages.
+– Ensure text is clearly readable against the background.
+– Use a 16:9 aspect ratio for optimal text placement.
+
+Story Text (to embed visually):
+"Days passed, and nothing happened. Alex wanted to dig up the seed to see what was wrong. His rabbit friend nudged his hand gently, as if to say 'Wait!'"
