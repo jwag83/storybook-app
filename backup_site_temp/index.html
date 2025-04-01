@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Personalized Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div class="landing-page">
+        <header>
+            <h1>Create Your Child's Story</h1>
+            <p class="tagline">Choose your characters, set your moral, pick a theme—then watch your personalized story come to life with engaging illustrations.</p>
+        </header>
+
+        <div class="features">
+            <div class="feature">
+                <div class="icon">👤</div>
+                <h3>Choose Characters</h3>
+                <p>Make your child the star of their own story</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🎯</div>
+                <h3>Set the Moral</h3>
+                <p>Teach valuable life lessons through storytelling</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🎨</div>
+                <h3>Pick a Theme</h3>
+                <p>Select from exciting adventure themes</p>
+            </div>
+            <div class="feature">
+                <div class="icon">✨</div>
+                <h3>Watch it Come Alive</h3>
+                <p>Beautiful illustrations bring your story to life</p>
+            </div>
+        </div>
+
+        <div class="sample-preview">
+            <div class="preview-book">
+                <img src="https://placehold.co/600x400/3498db/ffffff?text=Sample+Story" alt="Sample Story Preview">
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Create Your Story?</h2>
+            <p>Start your child's personalized adventure today!</p>
+            <button class="create-story-btn">Create Your Story</button>
+        </div>
+    </div>
+
+    <!-- Personalization Wizard -->
+    <div class="wizard-container" style="display: none;">
+        <div class="progress-bar">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+            <div class="step">4</div>
+            <div class="step">5</div>
+        </div>
+
+        <!-- Step 1: Main Character -->
+        <div class="wizard-step" id="step1">
+            <h2>Tell us about your child</h2>
+            <form class="character-form">
+                <div class="form-group">
+                    <label for="child-name">Child's Name</label>
+                    <input type="text" id="child-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="child-age">Age</label>
+                    <select id="child-age" required>
+                        <option value="">Select age</option>
+                        <option value="5">5 years</option>
+                        <option value="6">6 years</option>
+                        <option value="7">7 years</option>
+                        <option value="8">8 years</option>
+                        <option value="9">9 years</option>
+                        <option value="10">10 years</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="child-gender">Gender</label>
+                    <select id="child-gender" required>
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="favorite-color">Favorite Color</label>
+                    <select id="favorite-color" required>
+                        <option value="">Select color</option>
+                        <option value="red">Red</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="purple">Purple</option>
+                        <option value="pink">Pink</option>
+                        <option value="orange">Orange</option>
+                        <option value="custom">Custom Color</option>
+                    </select>
+                    <div id="custom-color-input" style="display: none;">
+                        <input type="text" id="custom-color-text" placeholder="Enter your favorite color">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="favorite-animal">Favorite Animal</label>
+                    <select id="favorite-animal" required>
+                        <option value="">Select animal</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="bird">Bird</option>
+                        <option value="butterfly">Butterfly</option>
+                        <option value="dolphin">Dolphin</option>
+                        <option value="elephant">Elephant</option>
+                        <option value="dragon">Dragon</option>
+                        <option value="unicorn">Unicorn</option>
+                        <option value="penguin">Penguin</option>
+                        <option value="giraffe">Giraffe</option>
+                        <option value="lion">Lion</option>
+                        <option value="tiger">Tiger</option>
+                        <option value="bear">Bear</option>
+                        <option value="rabbit">Rabbit</option>
+                        <option value="fox">Fox</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="physical-description">Special Characteristics (Optional)</label>
+                    <p class="help-text">For example: "loves to smile", "has curly hair", "always wears a red hat"</p>
+                    <textarea id="physical-description" rows="3" placeholder="Describe what makes your child special..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="next-btn">Next Step</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 2: Supporting Characters -->
+        <div class="wizard-step" id="step2" style="display: none;">
+            <h2>Add Supporting Characters</h2>
+            <form class="supporting-characters-form">
+                <div class="form-group">
+                    <label for="character-1-name">Character 1 Name</label>
+                    <input type="text" id="character-1-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="character-1-relation">Who is this person?</label>
+                    <input type="text" id="character-1-relation" placeholder="e.g., best friend, teacher, neighbor" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="character-2-name">Character 2 Name</label>
+                    <input type="text" id="character-2-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="character-2-relation">Who is this person?</label>
+                    <input type="text" id="character-2-relation" placeholder="e.g., best friend, teacher, neighbor" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pet-name">Pet Name (Optional)</label>
+                    <input type="text" id="pet-name">
+                </div>
+
+                <div class="form-group">
+                    <label for="pet-type">Pet Type (Optional)</label>
+                    <input type="text" id="pet-type">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="prev-btn">Previous</button>
+                    <button type="button" class="next-btn">Next Step</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 3: Theme Selection -->
+        <div class="wizard-step" id="step3" style="display: none;">
+            <h2>Choose Your Story Theme</h2>
+            <form class="theme-form">
+                <div class="theme-grid">
+                    <div class="theme-option">
+                        <input type="radio" id="theme-adventure" name="theme" value="adventure" required>
+                        <label for="theme-adventure">
+                            <div class="theme-icon">🗺️</div>
+                            <h3>Adventure</h3>
+                            <p>Exciting journeys and thrilling discoveries</p>
+                        </label>
+                    </div>
+                    <div class="theme-option">
+                        <input type="radio" id="theme-magic" name="theme" value="magic" required>
+                        <label for="theme-magic">
+                            <div class="theme-icon">✨</div>
+                            <h3>Magic</h3>
+                            <p>Enchanting spells and magical creatures</p>
+                        </label>
+                    </div>
+                    <div class="theme-option">
+                        <input type="radio" id="theme-space" name="theme" value="space" required>
+                        <label for="theme-space">
+                            <div class="theme-icon">🚀</div>
+                            <h3>Space</h3>
+                            <p>Cosmic adventures and alien friends</p>
+                        </label>
+                    </div>
+                    <div class="theme-option">
+                        <input type="radio" id="theme-nature" name="theme" value="nature" required>
+                        <label for="theme-nature">
+                            <div class="theme-icon">🌿</div>
+                            <h3>Nature</h3>
+                            <p>Wildlife adventures and environmental exploration</p>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="prev-btn">Previous</button>
+                    <button type="button" class="next-btn">Next Step</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 4: Moral Selection -->
+        <div class="wizard-step" id="step4" style="display: none;">
+            <h2>Choose Your Story's Moral</h2>
+            <form class="moral-form">
+                <div class="moral-grid">
+                    <div class="moral-option">
+                        <input type="radio" id="moral-courage" name="moral" value="courage" required>
+                        <label for="moral-courage">
+                            <div class="moral-icon">🦁</div>
+                            <h3>Courage</h3>
+                            <p>Facing fears and standing up for what's right</p>
+                        </label>
+                    </div>
+                    <div class="moral-option">
+                        <input type="radio" id="moral-kindness" name="moral" value="kindness" required>
+                        <label for="moral-kindness">
+                            <div class="moral-icon">❤️</div>
+                            <h3>Kindness</h3>
+                            <p>Being helpful and caring for others</p>
+                        </label>
+                    </div>
+                    <div class="moral-option">
+                        <input type="radio" id="moral-patience" name="moral" value="patience" required>
+                        <label for="moral-patience">
+                            <div class="moral-icon">⏳</div>
+                            <h3>Patience</h3>
+                            <p>Learning to wait and persevere</p>
+                        </label>
+                    </div>
+                    <div class="moral-option">
+                        <input type="radio" id="moral-honesty" name="moral" value="honesty" required>
+                        <label for="moral-honesty">
+                            <div class="moral-icon">🤝</div>
+                            <h3>Honesty</h3>
+                            <p>Telling the truth and being trustworthy</p>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="prev-btn">Previous</button>
+                    <button type="button" class="next-btn">Next Step</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 5: Story Length -->
+        <div class="wizard-step" id="step5" style="display: none;">
+            <h2>Choose Your Story Length</h2>
+            <form class="length-form">
+                <div class="length-grid">
+                    <div class="length-option">
+                        <input type="radio" id="length-mini" name="length" value="mini" required>
+                        <label for="length-mini">
+                            <div class="length-icon">📖</div>
+                            <h3>Mini Story</h3>
+                            <p>8 pages</p>
+                            <div class="length-description">Perfect for younger readers or quick bedtime stories</div>
+                        </label>
+                    </div>
+                    <div class="length-option">
+                        <input type="radio" id="length-short" name="length" value="short" required>
+                        <label for="length-short">
+                            <div class="length-icon">📚</div>
+                            <h3>Short Story</h3>
+                            <p>12 pages</p>
+                            <div class="length-description">Great for developing readers and longer reading sessions</div>
+                        </label>
+                    </div>
+                    <div class="length-option">
+                        <input type="radio" id="length-medium" name="length" value="medium" required>
+                        <label for="length-medium">
+                            <div class="length-icon">📖📚</div>
+                            <h3>Medium Story</h3>
+                            <p>18 pages</p>
+                            <div class="length-description">Ideal for chapter-style reading and deeper storytelling</div>
+                        </label>
+                    </div>
+                    <div class="length-option">
+                        <input type="radio" id="length-long" name="length" value="long" required>
+                        <label for="length-long">
+                            <div class="length-icon">📚📚</div>
+                            <h3>Long Story</h3>
+                            <p>25 pages</p>
+                            <div class="length-description">Perfect for advanced readers and extended adventures</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="prev-btn">Previous</button>
+                    <button type="submit" class="generate-btn">Generate Story</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="story_generator.js"></script>
+</body>
+</html> 
