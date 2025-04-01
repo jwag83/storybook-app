@@ -42,4 +42,4 @@ backup_site/images/
 *.ico
 
 # Git files
-.git/ 
+.git/ backup_site_temp/
