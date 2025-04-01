@@ -1,15 +1,21 @@
-# Dependencies
-node_modules/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-
 # Environment variables
 .env
 .env.local
 .env.*.local
 
-# Build output
+# Backup and temporary files
+backup_site_temp/
+*.bak
+*.tmp
+*.temp
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
 dist/
 build/
 .next/
@@ -26,20 +32,10 @@ out/
 logs/
 *.log
 
-# Testing
-coverage/
+# Local storage
+images/
+uploads/
 
-# Temporary files
-tmp/
-temp/
-
-# Large files and images
-backup_site/images/
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.ico
-
-# Git files
-.git/ backup_site_temp/
+# Optional: Development scripts
+scripts/
+dev-scripts/
