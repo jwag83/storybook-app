@@ -31,4 +31,15 @@ coverage/
 
 # Temporary files
 tmp/
-temp/ 
+temp/
+
+# Large files and images
+backup_site/images/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# Git files
+.git/ 
