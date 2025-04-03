@@ -1,0 +1,91 @@
+[DEBUG] Getting template for section: intro
+[DEBUG] Mapped section "intro" to "intro"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: intro
+[DEBUG] Using default template for intro
+[DEBUG] Word count for intro: 24
+=== Story Output ===
+[DEBUG] Getting template for section: setup
+[DEBUG] Mapped section "setup" to "setup"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: setup
+[DEBUG] Using default template for setup
+[DEBUG] Word count for setup: 14
+[DEBUG] Getting template for section: teamIntro
+[DEBUG] Mapped section "teamIntro" to "teamIntro"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: teamIntro
+[DEBUG] Using default template for teamIntro
+[DEBUG] Word count for teamIntro: 14
+[DEBUG] Getting template for section: initialChallenge
+[DEBUG] Mapped section "initialChallenge" to "initialChallenge"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: initialChallenge
+[DEBUG] Using default template for initialChallenge
+[DEBUG] Word count for initialChallenge: 9
+[DEBUG] Getting template for section: teamDynamics
+[DEBUG] Mapped section "teamDynamics" to "teamDynamics"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: teamDynamics
+[DEBUG] Using default template for teamDynamics
+[DEBUG] Word count for teamDynamics: 14
+[DEBUG] Getting template for section: risingConflict
+[DEBUG] Mapped section "risingConflict" to "risingConflict"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: risingConflict
+[DEBUG] Using default template for risingConflict
+[DEBUG] Word count for risingConflict: 10
+[DEBUG] Getting template for section: backstory
+[DEBUG] Mapped section "backstory" to "backstory"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: backstory
+[DEBUG] Using default template for backstory
+[DEBUG] Word count for backstory: 10
+[DEBUG] Getting template for section: majorChallenge
+[DEBUG] Mapped section "majorChallenge" to "majorChallenge"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: majorChallenge
+[DEBUG] Using default template for majorChallenge
+[DEBUG] Word count for majorChallenge: 9
+[DEBUG] Getting template for section: midReflection
+[DEBUG] Mapped section "midReflection" to "midReflection"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: midReflection
+[DEBUG] Using default template for midReflection
+[DEBUG] Word count for midReflection: 7
+[DEBUG] Getting template for section: characterGrowth
+[DEBUG] Mapped section "characterGrowth" to "characterGrowth"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: characterGrowth
+[DEBUG] Using default template for characterGrowth
+[DEBUG] Word count for characterGrowth: 8
+[DEBUG] Getting template for section: newStrategy
+[DEBUG] Mapped section "newStrategy" to "newStrategy"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: newStrategy
+[DEBUG] Using default template for newStrategy
+[DEBUG] Word count for newStrategy: 9
+[DEBUG] Getting template for section: climax
+[DEBUG] Mapped section "climax" to "climax"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: climax
+[DEBUG] Using default template for climax
+[DEBUG] Word count for climax: 8
+[DEBUG] Getting template for section: turningPoint
+[DEBUG] Mapped section "turningPoint" to "turningPoint"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: turningPoint
+[DEBUG] Using default template for turningPoint
+[DEBUG] Word count for turningPoint: 6
+[DEBUG] Getting template for section: resolution
+[DEBUG] Mapped section "resolution" to "resolution"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: resolution
+[DEBUG] Using default template for resolution
+[DEBUG] Word count for resolution: 9
+[DEBUG] Getting template for section: celebration
+[DEBUG] Mapped section "celebration" to "celebration"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: celebration
+[DEBUG] Using default template for celebration
+[DEBUG] Word count for celebration: 5
+[DEBUG] Getting template for section: reflection
+[DEBUG] Mapped section "reflection" to "reflection"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: reflection
+[DEBUG] Using default template for reflection
+[DEBUG] Word count for reflection: 9
+[DEBUG] Getting template for section: returnHome
+[DEBUG] Mapped section "returnHome" to "returnHome"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: returnHome
+[DEBUG] Using default template for returnHome
+[DEBUG] Word count for returnHome: 11
+[DEBUG] Getting template for section: moral
+[DEBUG] Mapped section "moral" to "moral"
+[DEBUG] Looking for template - Theme: nature, SubTheme: exploration, Length: medium, Section: moral
+[DEBUG] Using default template for moral
+[DEBUG] Word count for moral: 9
