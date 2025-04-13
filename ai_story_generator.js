@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 const { validateUserInputs } = require("./content_filter");
 
 /**
@@ -17,7 +17,7 @@ async function generateTitlePage(storyMetadata) {
       moral,
       age,
       length,
-      customTheme
+      customTheme,
     } = storyMetadata;
 
     // Determine age group for appropriate title complexity
@@ -41,23 +41,31 @@ async function generateTitlePage(storyMetadata) {
     5. Avoid any inappropriate language or concepts
     6. Format the response as JSON: {"title": "Title Here", "subtitle": "Subtitle Here"}`;
 
-    const configuration = new Configuration({
+    const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    const openai = new OpenAIApi(configuration);
 
-    const response = await openai.createCompletion({
-      model: "gpt-3.5-turbo-instruct",
-      prompt: prompt,
-      max_tokens: 150,
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content: "You are a professional children's book title generator. You create engaging, age-appropriate titles and subtitles that capture the essence of the story."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
       temperature: 0.7,
+      max_tokens: 150,
       top_p: 1,
       frequency_penalty: 0.5,
       presence_penalty: 0.5,
     });
 
     // Parse the response
-    const responseText = response.data.choices[0].text.trim();
+    const responseText = response.choices[0].message.content.trim();
     
     // Extract JSON from the response
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
@@ -109,46 +117,65 @@ async function generateTitlePage(storyMetadata) {
   }
 }
 
-async function generateAIStory(input) {
+async function generateAIStory({
+  mainCharacter,
+  supportingCharacter,
+  relationship,
+  age,
+  gender,
+  theme,
+  customTheme,
+  moral,
+  customMoral,
+  length,
+  dedication,
+  favouriteColor,
+  favouritePet
+}) {
   // Validate user inputs for inappropriate content
   validateUserInputs({
-    mainCharacter: input.childName,
-    supportingCharacter: input.character1Name,
-    moral: input.moral,
-    title: input.title,
-    customTheme: input.customTheme
+    mainCharacter,
+    supportingCharacter,
+    moral,
+    customTheme,
+    customMoral,
+    dedication,
+    favouriteColor,
+    favouritePet
   });
 
-  const configuration = new Configuration({
+  const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
-  const openai = new OpenAIApi(configuration);
 
   const pageCount = {
     mini: 8,
     short: 12,
     medium: 18,
     long: 25
-  }[input.storyLength];
+  }[length];
 
   const storyStructure = {
     mini: ['intro', 'challenge', 'turningPoint', 'resolution', 'moral', 'closing'],
     short: ['intro', 'challenge', 'risingAction', 'climax', 'resolution', 'moral', 'closing'],
     medium: ['intro', 'obstacle', 'teamForming', 'plan', 'setback', 'risingAction', 'climax', 'resolution', 'reflection', 'moral', 'closing'],
     long: ['intro', 'adventureCall', 'friendsIntro', 'earlyObstacle', 'characterInteraction', 'problemEscalates', 'teamStrategy', 'earlySetback', 'backstory', 'majorConflict', 'midpointReflection', 'characterDevelopment', 'companionship', 'bigChallenge', 'unexpectedTwist', 'regroup', 'risingAction', 'climax', 'courageousMoment', 'conflictResolution', 'celebration', 'reflection', 'returnHome', 'moral', 'emotionalClosure']
-  }[input.storyLength];
+  }[length];
 
-  const wordCountRange = input.age <= 5 ? '10-25' : input.age <= 8 ? '25-50' : '40-75';
+  const wordCountRange = age <= 5 ? '10-25' : age <= 8 ? '25-50' : '40-75';
 
   const prompt = `
-You are a professional children's author. Write a ${input.storyLength}-length story for a child aged ${input.age}.
+You are a professional children's author. Write a ${length}-length story for a child aged ${age}.
 
 STORY REQUIREMENTS:
-- Main character: ${input.childName}
-- Supporting characters: ${input.character1Name ? input.character1Name : "none specified"}
-- Theme: ${input.theme}${input.subTheme ? ` (${input.subTheme})` : ''}
-- Emotional tone: ${input.emotionalTone}
-- Moral lesson: ${input.moral}
+- Main character: ${mainCharacter}
+- Supporting characters: ${supportingCharacter ? supportingCharacter : "none specified"}
+- Relationship: ${relationship ? relationship : "friend"}
+- Theme: ${theme}${customTheme ? ` (${customTheme})` : ''}
+- Moral lesson: ${moral}${customMoral ? ` (${customMoral})` : ''}
+- Dedication: ${dedication ? dedication : "none specified"}
+- Favorite color: ${favouriteColor ? favouriteColor : "none specified"}
+- Favorite pet: ${favouritePet ? favouritePet : "none specified"}
 - Total pages required: ${pageCount}
 - Word count per page: ${wordCountRange} words
 
@@ -168,13 +195,13 @@ WORD COUNT GUIDELINES:
 - Maintain consistent word count across all pages
 
 AGE-APPROPRIATE GUIDELINES:
-${input.age <= 5 ? `
+${age <= 5 ? `
 - Use very simple vocabulary and short sentences
 - Repeat important words and phrases
 - Focus on concrete concepts
 - Keep action gentle and reassuring
 - Use basic emotions and clear cause-effect relationships` :
-  input.age <= 8 ? `
+  age <= 8 ? `
 - Use straightforward vocabulary with some challenging words
 - Mix short and medium-length sentences
 - Include some abstract concepts with explanations
@@ -190,105 +217,58 @@ ${input.age <= 5 ? `
 FORMATTING REQUIREMENTS:
 1. Begin each page with "Page X:" followed by the content
 2. Keep each page focused on its designated story element
-3. Maintain consistent narrative voice and emotional tone (${input.emotionalTone})
+3. Maintain consistent narrative voice and emotional tone
 4. Ensure smooth transitions between pages
 5. Build toward the moral lesson naturally
-6. Match vocabulary and sentence complexity to age ${input.age}
+6. Match vocabulary and sentence complexity to age ${age}
 
-Write the complete story now, using exactly ${pageCount} pages with ${wordCountRange} words per page.
-
----
-📏 STRUCTURE + WORD COUNT RULES
-
-Each story must:
-- Be exactly ${pageCount} pages long (e.g. 12 for 'short', 25 for 'long')
-- Contain one full story section per page, following the specified structure
-- Each page must meet the minimum word count for the child's age
-
-Word Count Rules (per page):
-- Age 3–5: 10–25 words
-- Age 6–8: 25–50 words
-- Age 9–10: 40–75 words
-
-❗DO NOT return any page below the minimum word count
-✅ Use rich sensory details, small bits of dialogue, and internal thoughts to expand content when needed
-🛑 Avoid filler — if over limit, cut repetition or unnecessary phrases
-
-💡 Example:
-Page 5 should say: "Page 5: Luna stepped into the dark forest, her heart beating like a drum. 'We have to be brave,' she whispered. The trees seemed to listen." 
-(→ hits target words + emotion + description)
-
-🟨 LONG STORY SPECIAL GUIDANCE (Age 9 - 25 pages)
-
-• Each page should be a self-contained and complete scene or moment that stands on its own and can be illustrated independently.
-• Word count per page should aim for **35–80 words**, with a **hard minimum of 25**.
-• Total word count should aim for 900+ words, but this is not strictly required.
-• Each page must include at least one of:
-   – Character thoughts or reflections
-   – Descriptive setting or atmosphere
-   – Minor actions or emotional responses
-   – Small side-events or interactions
-
-❗ Avoid:
-• Filler words or meaningless repetition
-• Rushing through the story arc
-• Overly short or vague pages that feel empty
-
-💡 Goal: Make each page satisfying on its own AND contribute to the full narrative. These stories will be paired with illustrations, so each page must feel meaningful.
-
-💡 Example fix:
-Too short: "Luna walked into the cave. It was quiet and dark."
-Improved: "Luna tiptoed into the cave, her heart racing. Shadows danced on the stone walls, and each drip of water echoed like a warning. She held her breath, wondering what secrets lay ahead."
-
-LONG STORY EXPANSION STRATEGIES (for Age 9 stories, 25 pages):
-- Each page must have **35–80 words**
-- Total word count must be **at least 1000 words**
-- Avoid pages with fewer than **25 words** — these will fail validation
-
-To reach the correct word count **without filler**, you can:
-• Add internal character thoughts or reflections
-• Describe the environment or atmosphere more vividly
-• Insert small challenges, decisions, or discoveries
-• Include mini-dialogue that develops the theme or moral
-• Expand on emotional reactions or moments of hesitation
-
-✅ Each page must feel like a meaningful part of the adventure, but also clear enough to be illustrated on its own.
-⚠️ Avoid repeating ideas or writing vague "padding" sentences — every line must build the story.
-
-EXAMPLE PAGE:
-"Milo stepped into the glowing cave. The walls sparkled like diamonds, and the air smelled of honey and moss. 'This must be where the light is coming from,' he whispered. But as he took a step forward, a soft growl echoed through the chamber..."
-`.trim();
+Write the complete story now, using exactly ${pageCount} pages with ${wordCountRange} words per page.`;
 
   try {
-    const response = await openai.createChatCompletion({
+    const response = await openai.chat.completions.create({
       model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.85,
+      messages: [
+        {
+          role: "system",
+          content: "You are a professional children's book author who creates engaging, age-appropriate stories that follow specific formatting and content guidelines."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      temperature: 0.7,
+      max_tokens: 2500,
+      top_p: 1,
+      frequency_penalty: 0.5,
+      presence_penalty: 0.5,
     });
 
-    const storyText = response.data.choices[0].message.content;
-    const pages = storyText
-      .split(/Page \d+:/)
-      .slice(1)
-      .map(p => p.trim());
+    const storyText = response.choices[0].message.content;
+    const pages = storyText.split('\n\n')
+      .filter(page => page.trim().startsWith('Page'))
+      .map(page => page.trim());
 
     // Generate the title page
-    const titlePage = await generateTitlePage(input);
+    const titlePage = await generateTitlePage({
+      mainCharacter,
+      supportingCharacter,
+      theme,
+      moral,
+      age,
+      length,
+      customTheme,
+    });
 
     // Return the story with the title page
     return {
-      story: pages,
-      titlePage: titlePage
+      titlePage,
+      pages
     };
+
   } catch (error) {
-    console.error("❌ Error generating story:", error);
-    return {
-      story: [],
-      titlePage: {
-        title: "A Wonderful Story",
-        subtitle: "A tale of friendship and courage"
-      }
-    };
+    console.error("Error generating story:", error);
+    throw error;
   }
 }
 

@@ -47,15 +47,33 @@ function containsBlockedWords(inputText) {
  * @param {string} inputs.moral - Story moral/lesson
  * @param {string} inputs.title - Story title
  * @param {string} inputs.customTheme - Custom theme if provided
+ * @param {string} inputs.customMoral - Custom moral if provided
+ * @param {string} inputs.dedication - Story dedication
+ * @param {string} inputs.favouriteColor - Favorite color
+ * @param {string} inputs.favouritePet - Favorite pet
  * @throws {Error} If inappropriate content is found
  */
-function validateUserInputs({ mainCharacter, supportingCharacter, moral, title, customTheme }) {
+function validateUserInputs({ 
+  mainCharacter, 
+  supportingCharacter, 
+  moral, 
+  title, 
+  customTheme,
+  customMoral,
+  dedication,
+  favouriteColor,
+  favouritePet
+}) {
   const fields = { 
     mainCharacter, 
     supportingCharacter, 
     moral,
     title: title || "Untitled Story", // Default if title is not provided
-    customTheme: customTheme || "" // Optional custom theme
+    customTheme: customTheme || "", // Optional custom theme
+    customMoral: customMoral || "", // Optional custom moral
+    dedication: dedication || "", // Optional dedication
+    favouriteColor: favouriteColor || "", // Optional favorite color
+    favouritePet: favouritePet || "" // Optional favorite pet
   };
   
   for (const [fieldName, value] of Object.entries(fields)) {

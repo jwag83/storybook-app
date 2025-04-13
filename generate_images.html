@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generating Your Story Images</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .generation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .progress-section {
+            margin: 40px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #007bff;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .status-message {
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #6c757d;
+        }
+        .preview-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .image-preview {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .image-preview img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .image-preview p {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .action-buttons {
+            margin-top: 40px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="generation-container">
+        <h1>Creating Your Story Images</h1>
+        
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="status-message" id="statusMessage">Preparing to generate images...</div>
+        </div>
+
+        <div class="preview-section" id="previewSection">
+            <!-- Image previews will be added here -->
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="viewStory()" style="display: none;" id="viewStoryBtn">View Complete Story</button>
+            <button class="btn btn-secondary" onclick="regenerateImages()" style="display: none;" id="regenerateBtn">Regenerate Images</button>
+        </div>
+    </div>
+
+    <script>
+        // Load story data and feedback
+        const storyData = JSON.parse(localStorage.getItem('currentStory'));
+        const feedback = JSON.parse(localStorage.getItem('storyFeedback'));
+
+        // Simulate image generation progress
+        let currentPage = 0;
+        const totalPages = Object.keys(storyData.pages).length;
+
+        function updateProgress() {
+            const progress = (currentPage / totalPages) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('statusMessage').textContent = `Generating image ${currentPage + 1} of ${totalPages}...`;
+        }
+
+        function addImagePreview(pageName, imageUrl) {
+            const previewSection = document.getElementById('previewSection');
+            const previewDiv = document.createElement('div');
+            previewDiv.className = 'image-preview';
+            previewDiv.innerHTML = `
+                <img src="${imageUrl}" alt="${pageName}">
+                <p>${pageName}</p>
+            `;
+            previewSection.appendChild(previewDiv);
+        }
+
+        async function generateImages() {
+            for (const [pageName, content] of Object.entries(storyData.pages)) {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // In a real implementation, this would be an actual API call
+                // For now, we'll use placeholder images
+                const imageUrl = `https://via.placeholder.com/600x400/007bff/ffffff?text=${encodeURIComponent(pageName)}`;
+                
+                addImagePreview(pageName, imageUrl);
+                currentPage++;
+                updateProgress();
+            }
+
+            // Show completion buttons
+            document.getElementById('statusMessage').textContent = 'All images generated successfully!';
+            document.getElementById('viewStoryBtn').style.display = 'inline-block';
+            document.getElementById('regenerateBtn').style.display = 'inline-block';
+        }
+
+        function viewStory() {
+            window.location.href = 'view_story.html';
+        }
+
+        function regenerateImages() {
+            // Clear preview section
+            document.getElementById('previewSection').innerHTML = '';
+            currentPage = 0;
+            updateProgress();
+            generateImages();
+        }
+
+        // Start image generation
+        generateImages();
+    </script>
+</body>
+</html> 

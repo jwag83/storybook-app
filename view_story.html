@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Story - StoryBook Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="story-preview">
+        <div id="story-pages">
+            <!-- Loading State -->
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Creating your illustrated story...</div>
+                <div class="loading-progress">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text">Generating images: 0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State (hidden by default) -->
+        <div id="error-container" class="error-container" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <div class="error-text">Oops! Something went wrong creating your story.</div>
+            <button class="retry-button" onclick="retryLoading()">Try Again</button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-group" style="margin-top: 2rem; text-align: center;">
+            <button class="generate-btn" onclick="downloadPDF()">Download PDF</button>
+            <button class="generate-btn" onclick="orderPrint()">Order Print</button>
+            <button class="generate-btn" onclick="regenerateImages()">Regenerate Images</button>
+        </div>
+    </div>
+
+    <script>
+        // Load story data from localStorage
+        const storyData = JSON.parse(localStorage.getItem('currentStory'));
+        const storyPages = document.getElementById('story-pages');
+        const errorContainer = document.getElementById('error-container');
+        const progressBar = document.querySelector('.progress');
+        const progressText = document.querySelector('.progress-text');
+
+        function createStoryPage(pageNumber, imageUrl, text) {
+            return `
+                <div class="story-page">
+                    <img class="story-image" src="${imageUrl}" alt="Page ${pageNumber}" onerror="handleImageError(this)">
+                    <div class="story-text">
+                        <h2>Page ${pageNumber}</h2>
+                        <p>${text}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleImageError(img) {
+            img.parentElement.innerHTML = `
+                <div class="error-container">
+                    <div class="error-icon">⚠️</div>
+                    <div class="error-text">Failed to load image</div>
+                    <button class="retry-button" onclick="retryImageLoad(this)">Retry</button>
+                </div>
+            `;
+        }
+
+        function retryImageLoad(button) {
+            const page = button.closest('.story-page');
+            const img = page.querySelector('img');
+            if (img) {
+                img.src = img.src; // Force reload
+            }
+        }
+
+        function retryLoading() {
+            errorContainer.style.display = 'none';
+            storyPages.innerHTML = `
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">Creating your illustrated story...</div>
+                    <div class="loading-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">Generating images: 0%</div>
+                    </div>
+                </div>
+            `;
+            loadStory();
+        }
+
+        async function loadStory() {
+            if (!storyData) {
+                errorContainer.style.display = 'block';
+                storyPages.innerHTML = '';
+                return;
+            }
+
+            const pages = storyData.pages || [];
+            if (pages.length === 0) {
+                errorContainer.style.display = 'block';
+                storyPages.innerHTML = '';
+                return;
+            }
+
+            // Simulate image generation progress
+            for (let i = 0; i < pages.length; i++) {
+                const progress = ((i + 1) / pages.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `Generating images: ${Math.round(progress)}%`;
+                
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Create page with placeholder image
+                const page = createStoryPage(i + 1, `https://placehold.co/800x450/3498db/ffffff?text=Page+${i+1}`, pages[i].text);
+                storyPages.innerHTML += page;
+            }
+
+            // Hide loading container after all pages are generated
+            document.querySelector('.loading-container').style.display = 'none';
+        }
+
+        function downloadPDF() {
+            // TODO: Implement PDF download
+            alert('PDF download coming soon!');
+        }
+
+        function orderPrint() {
+            // TODO: Implement print order
+            alert('Print ordering coming soon!');
+        }
+
+        function regenerateImages() {
+            // TODO: Implement image regeneration
+            alert('Image regeneration coming soon!');
+        }
+
+        // Load story when page loads
+        window.onload = loadStory;
+    </script>
+</body>
+</html> 

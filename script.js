@@ -67,15 +67,28 @@ generateBtn.addEventListener('click', async () => {
         showLoading();
         hideError();
         
-        // Generate story pages
-        storyPages = await generateStoryPages(storyData);
-        currentPage = 0;
+        const response = await fetch("/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(storyData),
+        });
+
+        const result = await response.json();
+        console.log("API Response:", result);
+
+        const preview = document.getElementById("storyPreview");
+        preview.innerHTML = `
+            <div class="story-title">
+                <h2>${result.titlePage.title}</h2>
+                <h4>${result.titlePage.subtitle}</h4>
+                <p><em>${result.titlePage.ageGroupNote}</em></p>
+                <p>${result.titlePage.preparedFor}</p>
+            </div>
+            <div class="story-body">
+                ${result.story.map((page, i) => `<p><strong>Page ${i + 1}:</strong> ${page}</p>`).join("")}
+            </div>
+        `;
         
-        // Show first page
-        showCurrentPage();
-        updateNavigationButtons();
-        
-        // Hide loading state
         hideLoading();
     } catch (error) {
         console.error('Error generating story:', error);

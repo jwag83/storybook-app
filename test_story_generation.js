@@ -1,36 +1,30 @@
-const { generateUserStory } = require("./generate_user_story");
+const { generateAIStory } = require('./ai_story_generator');
 
-(async () => {
-    const inputs = {
-        childName: "Ava",
-        gender: "girl",
-        age: 7,
-        length: "medium",
-        theme: "nature",
-        subTheme: "patience",
-        favoriteColor: "red",
-        favoriteAnimal: "dolphin",
-        physicalDescription: "curly brown hair and big curious eyes",
-        character1Name: "Maya",
-        character1Relation: "older cousin",
-        character2Name: "Luca",
-        character2Relation: "family friend",
-        emotionalTone: "joyful",
-        moral: "Creative ideas grow when we work together"
-    };
+async function runTestStory() {
+  try {
+    const story = await generateAIStory({
+      mainCharacter: "Ethan",
+      supportingCharacter: "Ruby",
+      relationship: "sister",
+      age: 6,
+      gender: "male",
+      theme: "Adventure",
+      customTheme: "",
+      moral: "Never give up",
+      customMoral: "",
+      length: "medium",
+      dedication: "For Ethan, who loves big adventures",
+      favouriteColor: "red",
+      favouritePet: "tiger cub"
+    });
 
-    try {
-        const story = await generateUserStory(inputs);
+    console.log("=== STORY TITLE PAGE ===");
+    console.log(JSON.stringify(story.titlePage, null, 2));
+    console.log("\n=== STORY PAGES ===");
+    console.log(JSON.stringify(story.pages, null, 2));
+  } catch (error) {
+    console.error("Error generating story:", error);
+  }
+}
 
-        console.log("=== STORY OUTPUT ===");
-        story.forEach((page, index) => {
-            console.log(`\nPage ${index + 1} (${page.section}):`);
-            console.log(`Word count: ${page.wordCount}`);
-            console.log(page.text);
-        });
-
-        console.log("\n✅ Story generated successfully.");
-    } catch (err) {
-        console.error("❌ Error generating story:", err.message);
-    }
-})(); 
+runTestStory(); 

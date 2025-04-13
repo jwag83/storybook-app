@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Your Story - StoryBook Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .review-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .story-preview {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .story-page {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        .page-number {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .illustration-options {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        .illustration-option {
+            margin-bottom: 15px;
+        }
+        .illustration-option label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .illustration-option select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="review-container">
+        <div class="review-header">
+            <h1>Review Your Story</h1>
+            <p>Please review your story before we generate the illustrations.</p>
+        </div>
+
+        <div id="story-preview" class="story-preview">
+            <!-- Story content will be loaded here -->
+        </div>
+
+        <div class="illustration-options">
+            <h3>Illustration Options</h3>
+            <div class="illustration-option">
+                <label for="illustration-style">Illustration Style</label>
+                <select id="illustration-style">
+                    <option value="cartoon">Cartoon Style</option>
+                    <option value="watercolor">Watercolor Style</option>
+                    <option value="digital">Digital Art Style</option>
+                </select>
+            </div>
+            <div class="illustration-option">
+                <label for="color-scheme">Color Scheme</label>
+                <select id="color-scheme">
+                    <option value="vibrant">Vibrant Colors</option>
+                    <option value="pastel">Pastel Colors</option>
+                    <option value="muted">Muted Colors</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="editStory()">Edit Story</button>
+            <button class="btn btn-primary" onclick="generateIllustratedStory()">Generate Illustrated Story</button>
+        </div>
+    </div>
+
+    <script>
+        // Load story data from localStorage
+        const storyData = JSON.parse(localStorage.getItem('currentStory'));
+        const previewContainer = document.getElementById('story-preview');
+
+        function displayStory() {
+            if (!storyData) {
+                previewContainer.innerHTML = '<p>No story data found. Please go back and create a story.</p>';
+                return;
+            }
+
+            const pages = storyData.pages || [];
+            previewContainer.innerHTML = `
+                <div class="preview-header">
+                    <h2>${storyData.title}</h2>
+                    <p>${pages.length} pages</p>
+                </div>
+                <div class="preview-pages">
+                    ${pages.map((page, index) => `
+                        <div class="story-page">
+                            <div class="page-number">Page ${index + 1}</div>
+                            <p>${page.text}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function editStory() {
+            // Go back to the story creation wizard
+            window.location.href = 'index.html';
+        }
+
+        function generateIllustratedStory() {
+            // Get illustration options
+            const illustrationStyle = document.getElementById('illustration-style').value;
+            const colorScheme = document.getElementById('color-scheme').value;
+
+            // Add illustration options to story data
+            const updatedStoryData = {
+                ...storyData,
+                illustrationOptions: {
+                    style: illustrationStyle,
+                    colorScheme: colorScheme
+                }
+            };
+
+            // Store the updated story data
+            localStorage.setItem('currentStory', JSON.stringify(updatedStoryData));
+            
+            // Redirect to the illustration generation page
+            window.location.href = 'generate_images.html';
+        }
+
+        // Display story when page loads
+        window.onload = displayStory;
+    </script>
+</body>
+</html> 
